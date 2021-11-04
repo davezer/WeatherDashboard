@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Weather Hub</title>
 </head>
@@ -21,11 +22,11 @@
         <container class="container">
             <div class="columns">
                 <!-- start of city search-->
-                <div class="column is-3 mt-5" id="citySearch">
+                <div class="column is-3 mt-5 ml-4" id="citySearch">
                     <h1 class="is-size-3 has-text-weight-semibold">Search for a City:</h1>
                     <input type="text" class="is-normal is-rounded input" id="cityInput" placeholder="New Haven, CT">
                     <div class="inputGroupAppend">
-                        <button class="button is-fullwidth is-rounded is-link mt-2">Search</button>
+                        <button class="button is-fullwidth has-shadow is-rounded is-info mt-2">Search</button>
                     </div>                 
                 
                     <!-- start of saved searches-->
@@ -37,9 +38,12 @@
                 </div>
            
 
-                <div id="todaysForcast">
+                <div id="weatherContent">
                     <div class="column is-12 mt-5">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non fugiat iure cumque animi blanditiis vel voluptatum eveniet! Earum, error at aspernatur, quasi voluptatibus architecto maxime veritatis esse pariatur maiores ducimus.
+                        <div id="todaysForecast" class="column is-12 is-rounded">
+                            <!-- display current weather here with <p> -->
+                        </div>
+
                     </div>
                
                 </div>
@@ -51,6 +55,9 @@
         </container>
         
     </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./assets/js/script.js"></script>
    
 </body>
 </html>
