@@ -1,53 +1,90 @@
-var apiKey = "31e22b4906dd29b754afd25ef05f0a2f";
-var searchHistory = [];
-var cityList = $("#cityList")
-var today = moment().format("L");
+var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
+var oneCallUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=";
+var exclude = "&exclude=minutely,hourly,alerts&units=imperial";
+var apikey = "&cnt=5&appid=36d0f33999f6c3dd12f810521b14e6a4";
 
 
 
+var cities = document.querySelector("#cities");
+var searchButton = document.getElementById("search");
 
+function displayForecast() {
+    var forecastEl = document.getElementById("forecast");
+    var rowEl = document.createElement("div");
+    rowEl.classList = "row";
+    forecastEl.appendChild(rowEl);
 
-var getCurrentConditions = function(city) {
+    for (i=0;i<5;i++) {
 
-    var city = $("#cityInput").val();  
-    var queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial" + "&appid=" + apiKey;
+        var cardEl = document.createElement("div");
+        var dateEl = document.createElement("div");
+        var iconEl = document.createElement("div");
+        var tempEl = document.createElement("div");
+        var windEl = document.createElement("div");
+        var humidityEl = document.createElement("div");
+        
+        cardEl.classList = "col-2 card";
+        dateEl.classList = "key";
+        iconEl.classList = "key";
+        tempEl.classList = "key";
+        windEl.classList = "key";
+        humidityEl.classList = "key";
 
-    fetch(queryUrl)
-        .then(response => response.json())
-        .then(data => console.log(data.main.temp));
+        dateEl.textContent = "Date: ";
+        iconEl.textContent = "Icon: ";
+        tempEl.textContent = "Temp: ";
+        windEl.textContent = "Wind: ";
+        humidityEl.textContent = "Humidity: ";
 
-        $("#weatherContent").css("display", "block");
-        $("#todaysForecast").empty();
-
-        var iconKey = data.weather[0].icon;
-        var iconUrl = "https://openweathermap.org/img/w/" + iconKey + ".png"; 
-
-    var currentCity = $('<h2 id="currentCity">',
-            '${data.name} ${today} <img src="${iconKey}" alt="${data.weather[0].description}" />',
-            '</h2>',
-            '<p>Temperature: ${data.main.temp} °F</p>',
-            '<p>Humidity: ${data.main.humidity}\%</p>',
-            '<p>Wind Speed: ${data.wind.speed} MPH</p>',
-        )
-    $("#todaysForecast").append(currentCity);
-
+        rowEl.appendChild(cardEl);
+        cardEl.appendChild(dateEl);
+        cardEl.appendChild(iconEl);
+        cardEl.appendChild(tempEl);
+        cardEl.appendChild(windEl);
+        cardEl.appendChild(humidityEl);
+    }
 
 }
+
+function displayCity() {
+    var citySearch = document.getElementById("city-search").value;
+    document.getElementById("city").innerText = citySearch + moment().format(' (MM/DD/YY)');
+    // console.log(citySearch);
+
+    fetch(weatherUrl + citySearch + "&units=imperial" + apikey)
+    .then(function(response) {
+        return response.json();
+    }).then(function(data) {
+            console.log(data);
+            var latitude = data.coord.lat;
+            var longitude = data.coord.lon;
+            fetch(oneCallUrl + latitude + "&lon=" + longitude + exclude + apikey)
+            .then(function(response) {
+                return response.json();
+            }).then(function(data) {
+                console.log(data);
+                var temperature = data.current.temp;
+                var windSpeed = data.current.wind_speed;
+                var humidity = data.current.humidity;
+                var uvIndex = data.current.uvi;
+                document.getElementById("temperature").textContent = "Temp: " + temperature + " F";
+                document.getElementById("wind").textContent = "Wind: " + windSpeed + " MPH";
+                document.getElementById("humidity").textContent = "Humidity: " + humidity + "%";
+                document.getElementById("uvIndex").textContent = "UV Index: " + uvIndex;
+            })
+
+
+        displayForecast();
+
+    });
+
     
+    var savedCity = document.createElement("button");
+    savedCity.setAttribute("id", citySearch);
+    savedCity.className = "search";
+    savedCity.textContent = citySearch;
+    cities.appendChild(savedCity);
+    document.getElementById("city-search").value = "";
+}
 
-
-
-
-
-
-
-
-
-
- 
-
-// event listeners for buton clicks
-$(".button").on("click", function(event){
-    event.preventDefault();
-    getCurrentConditions();
-});
+searchButton.addEventListener("click", displayCity);
