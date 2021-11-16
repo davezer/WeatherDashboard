@@ -11,72 +11,32 @@
     <title>Weather Dashboard</title>
 </head>
 <body>
-    <navbar style="text-align: center" class="nav is-info">Weather Dashboard</navbar>
-    <!--<div class="container">-->
-        <div class="columns">
-            <div id="cities" class=" column is-4 cities mt-5 ml-5">
+    <navbar  class="nav is-info">Weather Dashboard</navbar>
+
+    <div class="columns is-mobile">
+        <div id="cities" class=" column is-4 cities mt-5 ml-5">
+            <div class="search-form">
                 <h1>Search for a City:</h1>
-                <input id="city-search" class=" is-rounded" placeholder="New Haven, CT"></input>
-                <button id="search" class="button search is-info is rounded">Search</button>
+                <input id="city-search" class="is-rounded" placeholder="New Haven, CT"></input>
+                <button id="search" class="button search is-info is-rounded">Search</button>
+            </div>    
+        </div>
+
+        <div class="column is-9">
+            <div class="current-city">
+                <h2 id="city"></h2>
+                <div id="temperature" class="stats">Temp: F</div>
+                <div id="wind" class="stats">Wind:</div>
+                <div id="humidity" class="stats">Humidity: %</div>
+                <div id="uvIndex" class="stats">UV Index:</div>
             </div>
-            <div class="column is-8 card">
-                <div class="current-city">
-                    <h2 id="city"></h2>
-                    <div id="temperature" class="key stats">Temp: F</div>
-                    <div id="wind" class="key stats">Wind:</div>
-                    <div id="humidity" class="key stats">Humidity: %</div>
-                    <div id="uvIndex" class="key stats">UV Index:</div>
-                </div>
-                <div id="forecast">
-                    <h3>5-Day Forecast:</h3>
-                    <!--<div class="columns">
-                        <div class="column is-2 card">
-                            <div class="key">Date:</div>
-                            <div class="key">Icon:</div>
-                            <div class="key">Temp:</div>
-                            <div class="key">Wind:</div>
-                            <div class="key">Humidity:</div>
-                        </div>
-                        <div class="column is-2 card">
-                            <div class="key">Date:</div>
-                            <div class="key"> Icon:</div>
-                            <div class="key">Temp:</div>
-                            <div class="key">Wind:</div>
-                            <div class="key">Humidity:</div>
-                        </div>
-                        <div class="column is-2 card">
-                            <div class="key">Date:</div>
-                            <div class="key"> Icon:</div>
-                            <div class="key">Temp:</div>
-                            <div class="key">Wind:</div>
-                            <div class="key">Humidity:</div>
-                        </div>
-                        <div class="column is-2 card">
-                            <div class="key">Date:</div>
-                            <div class="key"> Icon:</div>
-                            <div class="key">Temp:</div>
-                            <div class="key">Wind:</div>
-                            <div class="key">Humidity:</div>
-                        </div>
-                        <div class="column is-2 card">
-                            <div class="key">Date:</div>
-                            <div class="key"> Icon:</div>
-                            <div class="key">Temp:</div>
-                            <div class="key">Wind:</div>
-                            <div class="key">Humidity:</div>
-                        </div>
-                        <div class="column is-2 card">
-                            <div class="key">Date:</div>
-                            <div class="key"> Icon:</div>
-                            <div class="key">Temp:</div>
-                            <div class="key">Wind:</div>
-                            <div class="key">Humidity:</div>
-                        </div>
-                    </div>-->
-                </div>
+            <div id="forecast">
+                <h3>5-Day Forecast:</h3>
+                
             </div>
         </div>
-    <!--</div>-->
+    </div>
+<!--</div>-->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
