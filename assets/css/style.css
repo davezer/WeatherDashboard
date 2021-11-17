@@ -46,3 +46,7 @@ h1 {
     font-size: 30px;
     font-weight: bold;
 }
+
+.box:last-child { 
+    margin-bottom: 1.5rem; 
+}

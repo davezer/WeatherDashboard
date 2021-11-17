@@ -40,7 +40,7 @@ function loadSearch(){
 
 function displayForecast(data) {
     var forecastEl = document.getElementById("forecast");
-    forecastEl.innerHTML
+    forecastEl.innerHTML = "";
     var rowEl = document.createElement("div");
     rowEl.classList = "columns is-mobile mt-5";
     forecastEl.appendChild(rowEl);
@@ -55,7 +55,7 @@ function displayForecast(data) {
         var windEl = document.createElement("div");
         var humidityEl = document.createElement("div");
         
-        cardEl.classList = "column is-2 is-mobile box fiveday ml-3 mr-4";
+        cardEl.classList = "column is-2 card box fiveday ml-3 mr-4";
         dateEl.classList = "key";
         tempEl.classList = "key";
         windEl.classList = "key";
