@@ -12,7 +12,7 @@ function saveSearch(city){
     var savedCity = document.createElement("button");
     savedCity.setAttribute("id", city);
     savedCity.className = "search button";
-    savedCity.textContent = "city";
+    savedCity.textContent = city;
     savedCity.addEventListener("click", function(){
         displayCity(this.id);
     });
@@ -38,23 +38,24 @@ function loadSearch(){
 
 }
 
-function displayForecast() {
+function displayForecast(data) {
     var forecastEl = document.getElementById("forecast");
     forecastEl.innerHTML
     var rowEl = document.createElement("div");
-    rowEl.classList = "row";
+    rowEl.classList = "columns is-mobile mt-5";
     forecastEl.appendChild(rowEl);
 
     for (i=0;i<5;i++) {
 
         var cardEl = document.createElement("div");
+        cardEl.setAttribute("style", "background-color: #00498F");
         var dateEl = document.createElement("div");
         var iconEl = document.createElement("img");
         var tempEl = document.createElement("div");
         var windEl = document.createElement("div");
         var humidityEl = document.createElement("div");
         
-        cardEl.classList = "is-2 is-mobile card";
+        cardEl.classList = "column is-2 is-mobile box fiveday ml-3 mr-4";
         dateEl.classList = "key";
         tempEl.classList = "key";
         windEl.classList = "key";
@@ -80,6 +81,9 @@ function displayForecast() {
 }
 
 function displayCity(citySearch) {
+    if (!citySearch) {
+        return false;
+    }
     
     fetch(weatherUrl + citySearch + apikey)
     .then(function(response) {
@@ -109,7 +113,7 @@ function displayCity(citySearch) {
                 document.getElementById("temperature").textContent = "Temp: " + temperature + " F";
                 document.getElementById("wind").textContent = "Wind: " + windSpeed + " MPH";
                 document.getElementById("humidity").textContent = "Humidity: " + humidity + "%";
-                document.getElementById("uvIndex").textContent = "UV Index: " + uvIndex;
+                document.getElementById("uvIndex").textContent = "UV Index: ";
 
                 var uvBox = document.createElement("div");
                 uvBox.setAttribute("id", "uv-box");
